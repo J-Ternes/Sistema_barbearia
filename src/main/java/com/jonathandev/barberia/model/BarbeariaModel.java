@@ -6,10 +6,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "barbearia")
+@Table(name = "barbearias")
 public class BarbeariaModel {
 
     @Id
@@ -22,7 +23,10 @@ public class BarbeariaModel {
 
     @NotBlank (message = "O campo nome é obrigatório")
     @Column(nullable = false)
-    private String CNPJ;
+    private String cnpj;
+
+    @OneToMany(mappedBy = "barbearia", cascade = CascadeType.ALL)
+    private List<BarbeiroModel> barbeiros;
 
     @Column(name = "criado_em")
     @CreationTimestamp

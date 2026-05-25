@@ -36,6 +36,9 @@ public class UserModel {
     @Enumerated(EnumType.STRING)
     private UserEnum role;
 
+    @OneToOne(mappedBy = "usuario")
+    private BarbeiroModel barbeiro;
+
     @Column(name = "criado_em")
     @CreationTimestamp
     private LocalDateTime criadoEm;
