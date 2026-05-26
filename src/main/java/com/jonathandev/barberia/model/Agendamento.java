@@ -24,6 +24,7 @@ public class Agendamento {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
+    @NotNull(message = "O campo status é obrigatório")
     private StatusAgendamentoEnum status;
 
     @ManyToOne

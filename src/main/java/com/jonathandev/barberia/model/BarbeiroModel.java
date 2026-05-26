@@ -3,7 +3,10 @@ package com.jonathandev.barberia.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -17,7 +20,7 @@ public class BarbeiroModel {
     private UUID id;
 
     @NotBlank(message = "É obrigatório preencher o CPF")
-    @Column(name = "CPF", nullable = false, unique = true)
+    @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
 
     private boolean ativo;
@@ -29,4 +32,12 @@ public class BarbeiroModel {
     @ManyToOne
     @JoinColumn(name = "id_barbearia", nullable = false)
     private BarbeariaModel barbearia;
+
+    @CreationTimestamp
+    @Column(name = "criado_em")
+    private LocalDateTime criadoEm;
+
+    @Column(name = "atualizado_em")
+    @UpdateTimestamp
+    private LocalDateTime atualizadoEm;
 }

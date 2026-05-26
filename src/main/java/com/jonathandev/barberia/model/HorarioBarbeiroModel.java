@@ -22,6 +22,7 @@ public class HorarioBarbeiroModel {
     private UUID id;
 
     @Column(name = "dia_disponivel", nullable = false)
+    @NotNull(message = "O campo dia disponível é obrigatório")
     @Enumerated(EnumType.STRING)
     private DayOfWeek diaDisponivel;
 
