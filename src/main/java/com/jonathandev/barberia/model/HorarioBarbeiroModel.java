@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
@@ -34,4 +37,11 @@ public class HorarioBarbeiroModel {
     @JoinColumn(name = "barbeiro_id", nullable = false)
     private BarbeiroModel barbeiro;
 
+    @CreationTimestamp
+    @Column(name = "criado_em")
+    private LocalDateTime criadoEm;
+
+    @Column(name = "atualizado_em")
+    @UpdateTimestamp
+    private LocalDateTime atualizadoEm;
 }
