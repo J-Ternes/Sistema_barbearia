@@ -18,7 +18,6 @@ public class UserService {
     public UserModel cadastrarNovoUsuario(UserRegisterDto user){
         UserModel emailCadastrado = userRepository.findByEmail(user.email()).orElseThrow(()-> new EmailEncontradoException());
 
-
         UserModel novoUsuario = new UserModel();
         novoUsuario.setNome(user.nome());
         novoUsuario.setEmail(user.email());
