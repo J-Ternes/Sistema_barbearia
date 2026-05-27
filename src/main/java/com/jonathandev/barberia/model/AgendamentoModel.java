@@ -12,7 +12,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "agendamento")
 @Data
-public class Agendamento {
+public class AgendamentoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
