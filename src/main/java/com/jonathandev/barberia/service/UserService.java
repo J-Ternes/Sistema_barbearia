@@ -1,6 +1,7 @@
 package com.jonathandev.barberia.service;
 
 import com.jonathandev.barberia.dto.UserRegisterDto;
+import com.jonathandev.barberia.dto.UserResponseDto;
 import com.jonathandev.barberia.exception.EmailEncontradoException;
 import com.jonathandev.barberia.model.UserEnum;
 import com.jonathandev.barberia.model.UserModel;
@@ -8,6 +9,8 @@ import com.jonathandev.barberia.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +28,10 @@ public class UserService {
         novoUsuario.setRole(UserEnum.CLIENTE);
 
        return userRepository.save(novoUsuario);
+    }
+
+    public List<UserResponseDto> mostrarUsuarios(){
+        return  userRepository.findByAll().stream().map(user -> new UserResponseDto(
+                user.getNome(),user.getRole())).toList();
     }
 }
