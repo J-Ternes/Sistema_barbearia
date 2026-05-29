@@ -1,12 +1,15 @@
 package com.jonathandev.barberia.controller;
 
 import com.jonathandev.barberia.dto.UserRegisterDto;
+import com.jonathandev.barberia.model.UserModel;
 import com.jonathandev.barberia.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -27,6 +30,12 @@ public class UserController{
     public ResponseEntity mostrarUsuarios(){
         return ResponseEntity.status(HttpStatus.FOUND).body(userService.mostrarUsuarios());
 
+    }
+
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity deletarUsuario(@PathVariable UUID id) {
+        userService.deletarUsuario(id);
+        return ResponseEntity.noContent().build();
     }
 
 
