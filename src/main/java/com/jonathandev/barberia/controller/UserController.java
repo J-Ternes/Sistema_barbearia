@@ -1,6 +1,7 @@
 package com.jonathandev.barberia.controller;
 
 import com.jonathandev.barberia.dto.UserRegisterDto;
+import com.jonathandev.barberia.dto.UserUpdateEmailDto;
 import com.jonathandev.barberia.model.UserModel;
 import com.jonathandev.barberia.service.UserService;
 import jakarta.validation.Valid;
@@ -36,6 +37,13 @@ public class UserController{
     public ResponseEntity deletarUsuario(@PathVariable UUID id) {
         userService.deletarUsuario(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/atualizar/{id}")
+    public ResponseEntity atualizarEmail(@PathVariable UUID id, @RequestBody UserUpdateEmailDto user){
+       UserModel usuarioAtualizado = userService.atualizarEmail(id,user);
+
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioAtualizado);
     }
 
 
