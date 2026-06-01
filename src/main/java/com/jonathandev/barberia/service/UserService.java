@@ -18,10 +18,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserService {
 
+
     private final UserRepository userRepository;
 
     public UserModel cadastrarNovoUsuario(UserRegisterDto user){
-        UserModel emailCadastrado = userRepository.findByEmail(user.email()).orElseThrow(()-> new EmailEncontradoException());
+        userRepository.findByEmail(user.email()).ifPresent(u->{throw new EmailEncontradoException();}); //Verifica se o email já existe
 
         UserModel novoUsuario = new UserModel();
         novoUsuario.setNome(user.nome());
@@ -33,7 +34,7 @@ public class UserService {
     }
 
     public List<UserResponseDto> mostrarUsuarios(){
-        return  userRepository.findByAll().stream().map(user -> new UserResponseDto(
+        return  userRepository.findAll().stream().map(user -> new UserResponseDto(
                 user.getNome(),user.getRole())).toList();
     }
 
@@ -46,7 +47,6 @@ public class UserService {
         UserModel usuario = userRepository.findById(id).orElseThrow(()-> new UsuarioNaoEncontradoException());// procura o usuario pelo ID;
         userRepository.findByEmail(user.email()).orElseThrow(()-> new EmailEncontradoException()); //Verifica se novo email ja existe no banco;
         usuario.setEmail(user.email()); //Altera o email do usuario
-
         return userRepository.save(usuario);
     }
 }
