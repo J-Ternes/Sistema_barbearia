@@ -43,7 +43,7 @@ public class UserController{
     public ResponseEntity atualizarEmail(@PathVariable UUID id, @RequestBody UserUpdateEmailDto user){
        UserModel usuarioAtualizado = userService.atualizarEmail(id,user);
 
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioAtualizado);
+        return ResponseEntity.status(HttpStatus.OK).body("Email atualizado com sucesso!");
     }
 
 

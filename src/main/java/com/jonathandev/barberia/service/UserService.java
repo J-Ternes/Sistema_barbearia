@@ -45,7 +45,7 @@ public class UserService {
 
     public UserModel atualizarEmail(UUID id, UserUpdateEmailDto user){
         UserModel usuario = userRepository.findById(id).orElseThrow(()-> new UsuarioNaoEncontradoException());// procura o usuario pelo ID;
-        userRepository.findByEmail(user.email()).orElseThrow(()-> new EmailEncontradoException()); //Verifica se novo email ja existe no banco;
+        userRepository.findByEmail(user.email()).ifPresent(u->{throw new EmailEncontradoException();});  //Verifica se novo email ja existe no banco;
         usuario.setEmail(user.email()); //Altera o email do usuario
         return userRepository.save(usuario);
     }
