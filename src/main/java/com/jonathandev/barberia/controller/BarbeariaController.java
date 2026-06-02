@@ -23,6 +23,8 @@ public class BarbeariaController {
     @GetMapping("/cadastradas")
     public ResponseEntity barbearias(){
 
+        return ResponseEntity.status(HttpStatus.FOUND).body(barbeariaService.mostrarBarbearias());
+
     }
 
 }
