@@ -30,7 +30,8 @@ public class BarbeariaController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable UUID id){
-
+        barbeariaService.deletarBarbearia(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

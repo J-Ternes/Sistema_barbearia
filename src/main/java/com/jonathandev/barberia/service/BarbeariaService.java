@@ -2,6 +2,7 @@ package com.jonathandev.barberia.service;
 
 import com.jonathandev.barberia.dto.BarbeariaRegisterDto;
 import com.jonathandev.barberia.dto.BarbeariaResponseDto;
+import com.jonathandev.barberia.exception.BarbeariaNaoEncontradaException;
 import com.jonathandev.barberia.exception.CnpjEncontradoException;
 import com.jonathandev.barberia.exception.NomeEncontradoException;
 import com.jonathandev.barberia.model.BarbeariaModel;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +34,11 @@ public class BarbeariaService {
         return barbeariaRepository.findAll().stream().map(barbearia -> new BarbeariaResponseDto(
                 barbearia.getNomeBarbearia()
         )).toList();
+    }
 
+    public void deletarBarbearia(UUID id){
+        BarbeariaModel barbearia = barbeariaRepository.findById(id).orElseThrow(()-> new BarbeariaNaoEncontradaException());
+        barbeariaRepository.delete(barbearia);
     }
 
 

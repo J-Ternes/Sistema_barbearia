@@ -1,10 +1,7 @@
 package com.jonathandev.barberia.handler;
 
 import com.jonathandev.barberia.dto.ErrorResponseDto;
-import com.jonathandev.barberia.exception.CnpjEncontradoException;
-import com.jonathandev.barberia.exception.EmailEncontradoException;
-import com.jonathandev.barberia.exception.NomeEncontradoException;
-import com.jonathandev.barberia.exception.UsuarioNaoEncontradoException;
+import com.jonathandev.barberia.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponseException;
@@ -34,5 +31,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NomeEncontradoException.class)
     public ResponseEntity<ErrorResponseDto> NomeEncontradoHandler(NomeEncontradoException nomeEncontradoException){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDto(409,"Nome já cadastrado", LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(BarbeariaNaoEncontradaException.class)
+    public ResponseEntity<ErrorResponseDto> barbeariaNaoEncontradaHandler(BarbeariaNaoEncontradaException barbeariaNaoEncontradaException){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(404,"Barbearia não cadastrado",LocalDateTime.now()));
     }
 }
