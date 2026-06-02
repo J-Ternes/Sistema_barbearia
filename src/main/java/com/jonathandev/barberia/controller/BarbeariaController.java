@@ -20,4 +20,9 @@ public class BarbeariaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(barbearia);
     }
 
+    @GetMapping("/cadastradas")
+    public ResponseEntity barbearias(){
+
+    }
+
 }

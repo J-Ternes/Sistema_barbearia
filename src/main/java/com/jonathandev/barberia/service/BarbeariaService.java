@@ -1,12 +1,15 @@
 package com.jonathandev.barberia.service;
 
 import com.jonathandev.barberia.dto.BarbeariaRegisterDto;
+import com.jonathandev.barberia.dto.BarbeariaResponseDto;
 import com.jonathandev.barberia.exception.CnpjEncontradoException;
 import com.jonathandev.barberia.exception.NomeEncontradoException;
 import com.jonathandev.barberia.model.BarbeariaModel;
 import com.jonathandev.barberia.repository.BarbeariaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +26,13 @@ public class BarbeariaService {
         barbeariaModel.setCnpj(barbeariaRegisterDto.cnpj());
 
         return barbeariaRepository.save(barbeariaModel);
+    }
+
+    public List<BarbeariaResponseDto> mostrarBarbearias (){
+        return barbeariaRepository.findAll().stream().map(barbearia -> new BarbeariaResponseDto(
+                barbearia.getNomeBarbearia()
+        )).toList();
+
     }
 
 
