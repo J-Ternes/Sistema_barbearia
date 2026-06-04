@@ -2,6 +2,7 @@ package com.jonathandev.barberia.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,6 +22,7 @@ public class BarbeiroModel {
 
     @NotBlank(message = "É obrigatório preencher o CPF")
     @Column(name = "cpf", nullable = false, unique = true)
+    @Size(max = 14)
     private String cpf;
 
     private boolean ativo;

@@ -1,7 +1,9 @@
 package com.jonathandev.barberia.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,10 +23,12 @@ public class UserModel {
 
     @NotBlank(message = "O campo nome é obrigatório!")
     @Column(nullable = false) //Não pode ser nulo
+    @Size(max = 50)
     private String nome;
 
     @NotBlank(message = "O campo email é obrigatório!")
     @Column(nullable = false, unique = true)
+    @Email(message = "O email deve ser um email válido")
     private String email;
 
     @NotBlank(message = "O campo senha é obrigatório!")

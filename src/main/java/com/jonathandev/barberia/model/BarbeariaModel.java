@@ -2,6 +2,7 @@ package com.jonathandev.barberia.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,10 +22,12 @@ public class BarbeariaModel {
 
     @NotBlank (message = "O campo nome é obrigatório")
     @Column(nullable = false, name = "nome_barbearia")
+    @Size(max = 60)
     private String nomeBarbearia;
 
     @NotBlank (message = "O campo nome é obrigatório")
     @Column(nullable = false, unique = true)
+    @Size(max = 18)
     private String cnpj;
 
     @OneToMany(mappedBy = "barbearia", cascade = CascadeType.ALL)
