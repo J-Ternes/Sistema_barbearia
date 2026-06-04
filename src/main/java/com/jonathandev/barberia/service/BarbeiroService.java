@@ -3,6 +3,7 @@ package com.jonathandev.barberia.service;
 import com.jonathandev.barberia.dto.BarbeiroRegisterDto;
 import com.jonathandev.barberia.dto.BarbeiroResponseDto;
 import com.jonathandev.barberia.exception.BarbeariaNaoEncontradaException;
+import com.jonathandev.barberia.exception.BarbeiroEncontradoException;
 import com.jonathandev.barberia.exception.BarbeiroNaoEncontradoException;
 import com.jonathandev.barberia.exception.UsuarioNaoEncontradoException;
 import com.jonathandev.barberia.model.BarbeariaModel;
@@ -31,6 +32,8 @@ public class BarbeiroService {
     {
         UserModel user = userRepository.findById(barbeiro.userId()).orElseThrow(()-> new UsuarioNaoEncontradoException());
         BarbeariaModel barbearia = barbeariaRepository.findById(barbeiro.barbeariaId()).orElseThrow(()-> new BarbeariaNaoEncontradaException());
+
+        barbeiroRepository.findByCpf(barbeiro.cpf()).ifPresent(b-> new BarbeiroEncontradoException());
 
         BarbeiroModel novoBarbeiro = new BarbeiroModel();
         novoBarbeiro.setUsuario(user);

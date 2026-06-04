@@ -42,4 +42,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> barbeiroNaoEncontradoHandler(BarbeiroNaoEncontradoException barbeiroNaoEncontradoException){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(404,"Barbeiro não cadastrado",LocalDateTime.now()));
     }
+
+    @ExceptionHandler(BarbeiroEncontradoException.class)
+    public ResponseEntity<ErrorResponseDto> barbeiroEncontradoHandler(BarbeiroEncontradoException barbeiroEncontradoException){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDto(409,"CPF já cadastrado",LocalDateTime.now()));
+    }
 }
