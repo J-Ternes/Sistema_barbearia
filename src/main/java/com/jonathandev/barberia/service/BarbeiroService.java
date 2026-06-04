@@ -3,6 +3,7 @@ package com.jonathandev.barberia.service;
 import com.jonathandev.barberia.dto.BarbeiroRegisterDto;
 import com.jonathandev.barberia.dto.BarbeiroResponseDto;
 import com.jonathandev.barberia.exception.BarbeariaNaoEncontradaException;
+import com.jonathandev.barberia.exception.BarbeiroNaoEncontradoException;
 import com.jonathandev.barberia.exception.UsuarioNaoEncontradoException;
 import com.jonathandev.barberia.model.BarbeariaModel;
 import com.jonathandev.barberia.model.BarbeiroModel;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +47,11 @@ public class BarbeiroService {
                barbeiros.getBarbearia().getNomeBarbearia())
        ).toList();
 
+    }
+
+    public void delatarBarbeiro(UUID id){
+
+       BarbeiroModel barbeiro = barbeiroRepository.findById(id).orElseThrow(()-> new BarbeiroNaoEncontradoException());
+        barbeiroRepository.delete(barbeiro);
     }
 }

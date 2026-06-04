@@ -31,5 +31,9 @@ public class BarbeiroController {
         return ResponseEntity.status(HttpStatus.OK).body(barbeiroService.mostrarBarbeiros());
     }
 
-
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity deletar(@PathVariable UUID id){
+        barbeiroService.delatarBarbeiro(id);
+        return ResponseEntity.noContent().build();
+    }
 }

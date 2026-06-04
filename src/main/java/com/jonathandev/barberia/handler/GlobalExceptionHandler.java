@@ -37,4 +37,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> barbeariaNaoEncontradaHandler(BarbeariaNaoEncontradaException barbeariaNaoEncontradaException){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(404,"Barbearia não cadastrado",LocalDateTime.now()));
     }
+
+    @ExceptionHandler(BarbeiroNaoEncontradoException.class)
+    public ResponseEntity<ErrorResponseDto> barbeiroNaoEncontradoHandler(BarbeiroNaoEncontradoException barbeiroNaoEncontradoException){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(404,"Barbeiro não cadastrado",LocalDateTime.now()));
+    }
 }
