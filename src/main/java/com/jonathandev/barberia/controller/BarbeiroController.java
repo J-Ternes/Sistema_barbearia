@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/barbeiros")
@@ -26,5 +28,8 @@ public class BarbeiroController {
     @GetMapping("/cadastrados")
     public ResponseEntity barbeiros(){
 
+        return ResponseEntity.status(HttpStatus.OK).body(barbeiroService.mostrarBarbeiros());
     }
+
+
 }

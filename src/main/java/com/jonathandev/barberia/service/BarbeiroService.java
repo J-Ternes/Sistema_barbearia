@@ -1,6 +1,7 @@
 package com.jonathandev.barberia.service;
 
 import com.jonathandev.barberia.dto.BarbeiroRegisterDto;
+import com.jonathandev.barberia.dto.BarbeiroResponseDto;
 import com.jonathandev.barberia.exception.BarbeariaNaoEncontradaException;
 import com.jonathandev.barberia.exception.UsuarioNaoEncontradoException;
 import com.jonathandev.barberia.model.BarbeariaModel;
@@ -12,6 +13,8 @@ import com.jonathandev.barberia.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +36,14 @@ public class BarbeiroService {
         novoBarbeiro.setCpf(barbeiro.cpf());
 
         return barbeiroRepository.save(novoBarbeiro);
+    }
+
+    public List<BarbeiroResponseDto> mostrarBarbeiros(){
+       return barbeiroRepository.findAll().stream().map(barbeiros-> new BarbeiroResponseDto(barbeiros.getCpf(),
+               barbeiros.getUsuario().getNome(),
+               barbeiros.getUsuario().getEmail(),
+               barbeiros.getBarbearia().getNomeBarbearia())
+       ).toList();
+
     }
 }
