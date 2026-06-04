@@ -36,6 +36,7 @@ public class BarbeiroService {
         novoBarbeiro.setUsuario(user);
         novoBarbeiro.setBarbearia(barbearia);
         novoBarbeiro.setCpf(barbeiro.cpf());
+        novoBarbeiro.setAtivo(true);
 
         return barbeiroRepository.save(novoBarbeiro);
     }
