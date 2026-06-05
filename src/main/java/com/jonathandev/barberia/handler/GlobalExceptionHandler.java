@@ -4,7 +4,6 @@ import com.jonathandev.barberia.dto.ErrorResponseDto;
 import com.jonathandev.barberia.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -46,5 +45,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BarbeiroEncontradoException.class)
     public ResponseEntity<ErrorResponseDto> barbeiroEncontradoHandler(BarbeiroEncontradoException barbeiroEncontradoException){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDto(409,"CPF já cadastrado",LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(NomeServicoEncontradoException.class)
+    public ResponseEntity<ErrorResponseDto> servicoEncontradoHandler(NomeServicoEncontradoException servicoEncontradoException){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDto(409,"Esse nome de Servico já existe",LocalDateTime.now()));
     }
 }
