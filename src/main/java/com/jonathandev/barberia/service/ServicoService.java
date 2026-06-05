@@ -33,5 +33,9 @@ public class ServicoService {
        return  servicosRepository.save(servicoCriado);
     }
 
+    public List<ServicoResponseDto> servicosCadastrados(){
+
+    }
+
 
 }
