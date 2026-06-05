@@ -1,5 +1,7 @@
 package com.jonathandev.barberia.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 
 public record ServicoResponseDto(
