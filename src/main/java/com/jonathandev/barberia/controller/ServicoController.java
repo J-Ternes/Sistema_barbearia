@@ -1,6 +1,7 @@
 package com.jonathandev.barberia.controller;
 
 import com.jonathandev.barberia.dto.ServicoRegisterDto;
+import com.jonathandev.barberia.dto.ServicoUpdateNomeDto;
 import com.jonathandev.barberia.model.ServicosModel;
 import com.jonathandev.barberia.service.ServicoService;
 import jakarta.validation.Valid;
@@ -34,6 +35,12 @@ public class ServicoController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deletar(@PathVariable UUID id){
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/alterar/nome/{id}")
+    public ResponseEntity atualizarNome(@RequestBody ServicoUpdateNomeDto servicoUpdate, @PathVariable UUID id){
+
+        return ResponseEntity.status(HttpStatus.OK).body(servicoService.alterarNome(servicoUpdate,id));
     }
 
 

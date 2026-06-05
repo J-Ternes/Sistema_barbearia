@@ -1,8 +1,9 @@
 package com.jonathandev.barberia.service;
 
-import com.jonathandev.barberia.dto.BarbeariaResponseDto;
+
 import com.jonathandev.barberia.dto.ServicoRegisterDto;
 import com.jonathandev.barberia.dto.ServicoResponseDto;
+import com.jonathandev.barberia.dto.ServicoUpdateNomeDto;
 import com.jonathandev.barberia.exception.BarbeariaNaoEncontradaException;
 import com.jonathandev.barberia.exception.NomeServicoEncontradoException;
 import com.jonathandev.barberia.exception.ServicoNaoEncontradoException;
@@ -51,6 +52,16 @@ public class ServicoService {
         ServicosModel servico = servicosRepository.findById(id).orElseThrow(()-> new ServicoNaoEncontradoException());
 
         servicosRepository.delete(servico);
+    }
+
+    public ServicosModel alterarNome(ServicoUpdateNomeDto novoNome, UUID id){
+        ServicosModel servicoNovoNome = servicosRepository.findById(id).orElseThrow(()-> new ServicoNaoEncontradoException());
+        servicosRepository.findByNomeServico(novoNome.nome()).ifPresent(s-> new NomeServicoEncontradoException());
+
+        servicoNovoNome.setNomeServico(novoNome.nome());
+
+        return servicosRepository.save(servicoNovoNome);
+
     }
 
 
