@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/servicos")
 @RequiredArgsConstructor
@@ -27,6 +29,11 @@ public class ServicoController {
     @GetMapping("/cadastrados")
     public ResponseEntity servicos(){
         return ResponseEntity.status(HttpStatus.OK).body(servicoService.servicosCadastrados());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deletar(@PathVariable UUID id){
+        return ResponseEntity.noContent().build();
     }
 
 

@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface ServicosRepository extends JpaRepository<ServicosModel, UUID>{
 
     Optional<ServicosModel> findByNomeServico(String nome);
+    Optional<ServicosModel> findById(UUID id);
 }

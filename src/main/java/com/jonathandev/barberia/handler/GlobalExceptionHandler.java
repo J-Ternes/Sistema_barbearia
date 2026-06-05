@@ -4,7 +4,9 @@ import com.jonathandev.barberia.dto.ErrorResponseDto;
 import com.jonathandev.barberia.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
@@ -50,5 +52,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NomeServicoEncontradoException.class)
     public ResponseEntity<ErrorResponseDto> servicoEncontradoHandler(NomeServicoEncontradoException servicoEncontradoException){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDto(409,"Esse nome de Servico já existe",LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(ServicoNaoEncontradoException.class)
+    public ResponseEntity<ErrorResponseDto> servicoNaoEncontradoHandler(ServicoNaoEncontradoException servicoNaoEncontradoException){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(404,"Serviço não cadastrado",LocalDateTime.now()));
     }
 }

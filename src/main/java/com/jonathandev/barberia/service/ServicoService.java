@@ -5,6 +5,7 @@ import com.jonathandev.barberia.dto.ServicoRegisterDto;
 import com.jonathandev.barberia.dto.ServicoResponseDto;
 import com.jonathandev.barberia.exception.BarbeariaNaoEncontradaException;
 import com.jonathandev.barberia.exception.NomeServicoEncontradoException;
+import com.jonathandev.barberia.exception.ServicoNaoEncontradoException;
 import com.jonathandev.barberia.model.BarbeariaModel;
 import com.jonathandev.barberia.model.ServicosModel;
 import com.jonathandev.barberia.repository.BarbeariaRepository;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -43,7 +45,12 @@ public class ServicoService {
         )).toList();
 
         return servicos;
+    }
 
+    public void deletarServico(UUID id){
+        ServicosModel servico = servicosRepository.findById(id).orElseThrow(()-> new ServicoNaoEncontradoException());
+
+        servicosRepository.delete(servico);
     }
 
 
