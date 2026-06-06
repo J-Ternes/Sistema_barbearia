@@ -24,7 +24,7 @@ public class HorarioBarbeariaModel {
     @Enumerated(EnumType.STRING)
     @Column(name = "dia_funcionamento", nullable = false)
     @NotNull(message = "O dia de funcionamento é obrigatorio")
-    private DayOfWeek diaFuncionamento;
+    private DiaSemana diaFuncionamento;
 
     @Column(name = "horario_abertura", nullable = false)
     @NotNull(message = "O horario de abertura é obrigatório")

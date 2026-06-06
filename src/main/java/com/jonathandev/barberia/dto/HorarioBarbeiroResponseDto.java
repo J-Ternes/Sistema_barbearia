@@ -1,10 +1,12 @@
 package com.jonathandev.barberia.dto;
 
-import java.time.DayOfWeek;
+import com.jonathandev.barberia.model.DiaSemana;
+
+
 import java.time.LocalTime;
 
 public record HorarioBarbeiroResponseDto(
-        DayOfWeek diaDisponivel,
+        DiaSemana diaDisponivel,
         LocalTime horarioInicio,
         LocalTime horarioFim,
         String nomeBarbeiro
