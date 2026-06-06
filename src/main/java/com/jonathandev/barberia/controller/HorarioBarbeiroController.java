@@ -22,6 +22,9 @@ public class HorarioBarbeiroController {
 
     @GetMapping("/cadastrados")
     public ResponseEntity horarios(){
-
+        return ResponseEntity.status(HttpStatus.OK).body(horarioBarbeiroService.horariosCadastrados());
     }
+
+    @DeleteMapping("/deletar")
+    public ResponseEntity
 }

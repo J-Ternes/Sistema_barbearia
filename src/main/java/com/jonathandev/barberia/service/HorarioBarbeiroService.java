@@ -1,6 +1,7 @@
 package com.jonathandev.barberia.service;
 
 import com.jonathandev.barberia.dto.HorarioBarbeiroRegisterDto;
+import com.jonathandev.barberia.dto.HorarioBarbeiroResponseDto;
 import com.jonathandev.barberia.exception.BarbeiroNaoEncontradoException;
 import com.jonathandev.barberia.model.BarbeiroModel;
 import com.jonathandev.barberia.model.HorarioBarbeariaModel;
@@ -8,7 +9,10 @@ import com.jonathandev.barberia.model.HorarioBarbeiroModel;
 import com.jonathandev.barberia.repository.BarbeiroRepository;
 import com.jonathandev.barberia.repository.HorarioBarbeiroRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +31,14 @@ public class HorarioBarbeiroService {
         horarios.setBarbeiro(barbeiro);
 
         return horarioBarbeiroRepository.save(horarios);
+    }
+
+    public List<HorarioBarbeiroResponseDto> horariosCadastrados(){
+       return horarioBarbeiroRepository.findAll().stream().map(horarios-> new HorarioBarbeiroResponseDto(
+               horarios.getDiaDisponivel(),
+               horarios.getHorarioInicio(),
+               horarios.getHorarioFim(),
+               horarios.getBarbeiro().getUsuario().getNome()
+       )).toList();
     }
 }
