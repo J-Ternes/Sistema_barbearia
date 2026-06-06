@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/horarios")
+@RequestMapping("/horarios/barbeiros")
 public class HorarioBarbeiroController {
 
     private final HorarioBarbeiroService horarioBarbeiroService;
