@@ -58,4 +58,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> servicoNaoEncontradoHandler(ServicoNaoEncontradoException servicoNaoEncontradoException){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(404,"Serviço não cadastrado",LocalDateTime.now()));
     }
+
+    @ExceptionHandler(HorarioNaoEncontradoException.class)
+    public ResponseEntity<ErrorResponseDto> horarioNaoEncontradoHandler(HorarioNaoEncontradoException horarioNaoEncontradoException){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(404,"Horário não cadastrado",LocalDateTime.now()));
+    }
 }

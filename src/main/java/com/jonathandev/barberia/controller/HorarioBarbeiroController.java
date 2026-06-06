@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/horarios")
@@ -25,6 +27,8 @@ public class HorarioBarbeiroController {
         return ResponseEntity.status(HttpStatus.OK).body(horarioBarbeiroService.horariosCadastrados());
     }
 
-    @DeleteMapping("/deletar")
-    public ResponseEntity
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity deletar(@PathVariable UUID id){
+        return ResponseEntity.noContent().build();
+    }
 }
